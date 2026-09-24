@@ -1,0 +1,114 @@
+/*
+  Every color/spacing/radius value a merchant might reasonably want to
+  re-theme is a CSS custom property with a sane default here — never a
+  hard-coded hex value inline in a component. A theme embedding this
+  widget overrides these on `.loyalty-widget` (or higher up the DOM)
+  without touching any component code at all. See docs/STOREFRONT.md.
+*/
+.loyalty-widget {
+  --loyalty-color-primary: #202223;
+  --loyalty-color-primary-contrast: #ffffff;
+  --loyalty-color-surface: #ffffff;
+  --loyalty-color-border: #e1e3e5;
+  --loyalty-color-text: #202223;
+  --loyalty-color-text-subdued: #6d7175;
+  --loyalty-radius: 8px;
+  --loyalty-spacing: 16px;
+  --loyalty-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  font-family: var(--loyalty-font-family);
+  color: var(--loyalty-color-text);
+  background: var(--loyalty-color-surface);
+  border: 1px solid var(--loyalty-color-border);
+  border-radius: var(--loyalty-radius);
+  padding: var(--loyalty-spacing);
+  max-width: 420px;
+  box-sizing: border-box;
+}
+
+.loyalty-widget * {
+  box-sizing: border-box;
+}
+
+.loyalty-widget__tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--loyalty-color-border);
+  margin-bottom: var(--loyalty-spacing);
+  overflow-x: auto;
+}
+
+.loyalty-widget__tab {
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--loyalty-color-text-subdued);
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+}
+
+.loyalty-widget__tab--active {
+  color: var(--loyalty-color-primary);
+  border-bottom-color: var(--loyalty-color-primary);
+  font-weight: 600;
+}
+
+.loyalty-widget__balance {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.loyalty-widget__subdued {
+  color: var(--loyalty-color-text-subdued);
+  font-size: 13px;
+}
+
+.loyalty-widget__reward-list,
+.loyalty-widget__section-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.loyalty-widget__reward-card {
+  border: 1px solid var(--loyalty-color-border);
+  border-radius: var(--loyalty-radius);
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.loyalty-widget__button {
+  background: var(--loyalty-color-primary);
+  color: var(--loyalty-color-primary-contrast);
+  border: none;
+  border-radius: var(--loyalty-radius);
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.loyalty-widget__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive: a widget embedded in a narrow storefront section (mobile
+   viewport, or a sidebar) drops to full-width and slightly tighter
+   spacing rather than truncating content. */
+@media (max-width: 480px) {
+  .loyalty-widget {
+    max-width: 100%;
+    --loyalty-spacing: 12px;
+  }
+
+  .loyalty-widget__balance {
+    font-size: 26px;
+  }
+}
